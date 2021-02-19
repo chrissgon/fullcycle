@@ -6,7 +6,7 @@ COPY . .
 
 RUN GOOS=linux go build main.go
 
-FROM alpine:3.1 as release
+FROM scratch
 
 WORKDIR /go/src
 
