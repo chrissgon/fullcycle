@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "app"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      - app
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - app
+    depends_on: 
+      - mysql
+
+  node:
+    build: ./node
+    container_name: node
+    networks: 
+      - app
+  
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - 8000:80
+    networks:
+      - app
+    depends_on: 
+      - mysql
+
+networks:
+  app:
+    driver: bridge
