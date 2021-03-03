@@ -7,8 +7,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "app"
-    volumes:
-      - ./mysql-data:/var/lib/mysql
     networks:
       - app
 
@@ -16,7 +14,7 @@ services:
     image: adminer
     container_name: adminer
     ports:
-      - 8080:8080
+      - 8000:8080
     networks:
       - app
     depends_on: 
@@ -25,6 +23,7 @@ services:
   node:
     build: ./node
     container_name: node
+    entrypoint: dockerize -wait tcp://mysql:3306 -timeout 30s node index.js
     networks: 
       - app
   
@@ -32,7 +31,7 @@ services:
     build: ./nginx
     container_name: nginx
     ports:
-      - 8000:80
+      - 8080:80
     networks:
       - app
     depends_on: 
