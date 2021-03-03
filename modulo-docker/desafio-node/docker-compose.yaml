@@ -24,6 +24,8 @@ services:
     build: ./node
     container_name: node
     entrypoint: dockerize -wait tcp://mysql:3306 -timeout 30s node index.js
+    volumes:
+      - ./node_modules
     networks: 
       - app
   
