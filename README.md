@@ -12,4 +12,4 @@ Para executar o desafio, acesse a pasta `desafio-go` e rode `docker run chrissgo
 ### Desafio NODE
 Para executar o desafio, acesse a pasta `desafio-node` e rode `docker-compose up -d`.
 
-Acesso ao app no endereço http://localhost:8000/
+Acesso ao app no endereço http://localhost:8080/
